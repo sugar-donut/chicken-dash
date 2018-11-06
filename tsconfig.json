@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "dist",
+    "module": "commonjs",
+    "sourceMap": true
+  },
+  "include": [
+    "./src/**/*",
+    "./phaser.d.ts"
+  ]
+}
