@@ -3,7 +3,7 @@
     "start": "webpack-dev-server --config ./config/webpack/webpack.config.js",
     "build": "webpack --config ./config/webpack/webpack.config.js",
     "lint": "tslint './src/**/*.ts'",
-    "fmt": "prettier --write './src/**/*.ts'"
+    "fmt": "prettier --write './src/**/*.ts' '*.html'"
   },
   "dependencies": {
     "phaser": "^3.15.1"
@@ -31,6 +31,10 @@
     "*.ts": [
       "prettier --write",
       "tslint",
+      "git add"
+    ],
+    "*.html": [
+      "prettier --write",
       "git add"
     ]
   }
