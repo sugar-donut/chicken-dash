@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -12,15 +13,15 @@ module.exports = {
     filename: '[name].js',
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
   },
   module: {
     rules: [
       {
         test: /\.ts?$/,
-        use: 'ts-loader'
-      }
-    ]
+        use: 'ts-loader',
+      },
+    ],
   },
   optimization: {
     splitChunks: {
@@ -28,23 +29,24 @@ module.exports = {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
+          chunks: 'all',
+        },
+      },
+    },
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
   },
   stats: true,
   plugins: [
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),
-      'typeof WEBGL_RENDERER': JSON.stringify(true)
+      'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html'
-    })
-  ]
+      template: 'index.html',
+    }),
+    new CopyWebpackPlugin([{ from: './assets', to: './assets' }]),
+  ],
 };
