@@ -1,3 +1,5 @@
+import { Chicken } from '../objects/chicken';
+
 export class GameScene extends Phaser.Scene {
   constructor() {
     super({
@@ -25,14 +27,6 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.roundPixels = true;
     staticLayer.setScale(2, 2);
 
-    const chicken = this.add.sprite(144, 208, 'chicken');
-    chicken.setInteractive();
-    chicken.on('pointerover', () => {
-      chicken.alpha = 0.5;
-    });
-
-    chicken.on('pointerout', () => {
-      chicken.alpha = 1;
-    });
+    const chicken = new Chicken(this, 144, 208, 'chicken');
   }
 }
