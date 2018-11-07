@@ -5,6 +5,6 @@ export const config: GameConfig = {
   height: 640,
   parent: 'game',
   scene: [MainMenuScene, GameScene],
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   width: 640,
 };
