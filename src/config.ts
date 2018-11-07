@@ -4,6 +4,9 @@ import { MainMenuScene } from './scenes/main-menu-scene';
 export const config: GameConfig = {
   height: 640,
   parent: 'game',
+  render: {
+    pixelArt: true,
+  },
   scene: [MainMenuScene, GameScene],
   type: Phaser.CANVAS,
   width: 640,
