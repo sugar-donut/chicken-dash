@@ -8,6 +8,6 @@ export const config: GameConfig = {
     pixelArt: true,
   },
   scene: [MainMenuScene, GameScene],
-  type: Phaser.CANVAS,
+  type: Phaser.AUTO,
   width: 640,
 };
