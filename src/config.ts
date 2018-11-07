@@ -7,7 +7,7 @@ export const config: GameConfig = {
   render: {
     pixelArt: true,
   },
-  scene: [MainMenuScene, GameScene],
+  scene: [GameScene, MainMenuScene],
   type: Phaser.AUTO,
   width: 640,
 };
