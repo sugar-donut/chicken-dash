@@ -1,7 +1,12 @@
 import mapJson from '../../assets/map.json';
+import { Direction } from '../enums/direction';
+import { Car } from '../objects/car';
 import { Chicken } from '../objects/chicken';
 
 export class GameScene extends Phaser.Scene {
+  private cars: Car[] = [];
+  private chickens: Chicken[] = [];
+
   constructor() {
     super({
       key: 'GameScene',
@@ -15,6 +20,7 @@ export class GameScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', '../../assets/map.json');
     this.load.image('tiles', '../../assets/tiles.png');
     this.load.image('chicken', '../../assets/chicken.png');
+    this.load.image('car', '../../assets/car.png');
   }
 
   public create(): void {
@@ -28,11 +34,23 @@ export class GameScene extends Phaser.Scene {
 
     const tileset = map.addTilesetImage('tiles');
     const staticLayer = map.createStaticLayer('Background', tileset, 0, 0);
-    this.cameras.main.roundPixels = true;
+    const coopLayer = map.createStaticLayer('Coops', tileset, 0, 0);
     staticLayer.setScale(2, 2);
+    coopLayer.setScale(2, 2);
+
     this.positionCamera();
 
-    const chicken = new Chicken(this, 144, 208, 'chicken');
+    const carSpawnConfig: TimerEventConfig = {
+      callback: this.spawnCar,
+      delay: 1000,
+      loop: true,
+    };
+
+    this.time.addEvent(carSpawnConfig);
+  }
+
+  public update(): void {
+    this.cars.forEach(car => car.move());
   }
 
   private positionCamera(): void {
@@ -40,4 +58,10 @@ export class GameScene extends Phaser.Scene {
     const y = window.innerHeight / 2 - mapJson.height * mapJson.tileheight;
     this.cameras.main.setPosition(Math.round(x), Math.round(y));
   }
+
+  private spawnCar = () => {
+    const car = new Car(this, 0, 275, 'car', Direction.Right);
+    car.setOrigin(0.5, 0);
+    this.cars.push(car);
+  };
 }
