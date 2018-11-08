@@ -1,9 +1,13 @@
+import mapJson from '../../assets/map.json';
 import { Chicken } from '../objects/chicken';
 
 export class GameScene extends Phaser.Scene {
   constructor() {
     super({
       key: 'GameScene',
+    });
+    window.addEventListener('resize', () => {
+      this.positionCamera();
     });
   }
 
@@ -18,15 +22,22 @@ export class GameScene extends Phaser.Scene {
 
     const map = this.make.tilemap({
       key: 'map',
-      tileHeight: 16,
-      tileWidth: 16,
+      tileHeight: mapJson.tileheight,
+      tileWidth: mapJson.tilewidth,
     });
 
     const tileset = map.addTilesetImage('tiles');
     const staticLayer = map.createStaticLayer('Background', tileset, 0, 0);
     this.cameras.main.roundPixels = true;
     staticLayer.setScale(2, 2);
+    this.positionCamera();
 
     const chicken = new Chicken(this, 144, 208, 'chicken');
+  }
+
+  private positionCamera(): void {
+    const x = window.innerWidth / 2 - mapJson.width * mapJson.tilewidth;
+    const y = window.innerHeight / 2 - mapJson.height * mapJson.tileheight;
+    this.cameras.main.setPosition(Math.round(x), Math.round(y));
   }
 }
