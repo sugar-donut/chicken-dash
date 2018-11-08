@@ -3,7 +3,9 @@
     "target": "es5",
     "outDir": "dist",
     "module": "commonjs",
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
   },
   "include": [
     "./src/**/*",
