@@ -6,6 +6,48 @@ import { Chicken } from '../objects/chicken';
 export class GameScene extends Phaser.Scene {
   private cars: Car[] = [];
   private chickens: Chicken[] = [];
+  private carSpawns = [
+    {
+      direction: Direction.Right,
+      x: 0,
+      y: 275,
+    },
+    {
+      direction: Direction.Right,
+      x: 0,
+      y: 305,
+    },
+    {
+      direction: Direction.Left,
+      x: 640,
+      y: 335,
+    },
+    {
+      direction: Direction.Left,
+      x: 640,
+      y: 365,
+    },
+    {
+      direction: Direction.Down,
+      x: 275,
+      y: 0,
+    },
+    {
+      direction: Direction.Down,
+      x: 305,
+      y: 0,
+    },
+    {
+      direction: Direction.Up,
+      x: 335,
+      y: 640,
+    },
+    {
+      direction: Direction.Up,
+      x: 365,
+      y: 640,
+    },
+  ];
 
   constructor() {
     super({
@@ -24,6 +66,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
+    this.cameras.main.setViewport(0, 0, 640, 640);
+
     this.add.text(10, 10, 'Game Scene');
 
     const map = this.make.tilemap({
@@ -60,7 +104,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   private spawnCar = () => {
-    const car = new Car(this, 0, 275, 'car', Direction.Right);
+    const randomSpawnIndex = Math.floor(Math.random() * this.carSpawns.length);
+    const spawn = this.carSpawns[randomSpawnIndex];
+    const { x, y, direction } = spawn;
+    const car = new Car(this, x, y, 'car', direction);
     car.setOrigin(0.5, 0);
     this.cars.push(car);
   };
