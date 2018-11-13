@@ -5,12 +5,12 @@ export class Chicken extends Phaser.GameObjects.Sprite {
   private isPointerDown: boolean = false;
   private speed: integer = 1;
 
-  constructor(scene, x, y, texture, frame?) {
+  constructor(scene, x, y, texture, direction, frame?) {
     super(scene, x, y, texture, frame);
     this.setInteractive();
     this.on('pointerdown', this.handlePointerDown);
     this.scene.input.on('pointerup', this.handlePointerUp);
-    this.setDirection(Direction.Right);
+    this.setDirection(direction);
     scene.add.existing(this);
   }
 
@@ -49,7 +49,6 @@ export class Chicken extends Phaser.GameObjects.Sprite {
 
   private handlePointerUp = (event): void => {
     if (this.isPointerDown) {
-      this.setDirection(Direction.Right);
       this.isPointerDown = false;
       this.alpha = 1;
     }

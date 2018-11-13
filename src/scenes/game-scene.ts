@@ -49,6 +49,49 @@ export class GameScene extends Phaser.Scene {
     },
   ];
 
+  private chickenSpawns = [
+    {
+      direction: Direction.Down,
+      x: 144,
+      y: 112,
+    },
+    {
+      direction: Direction.Up,
+      x: 208,
+      y: 528,
+    },
+    {
+      direction: Direction.Right,
+      x: 112,
+      y: 144,
+    },
+    {
+      direction: Direction.Left,
+      x: 528,
+      y: 208,
+    },
+    {
+      direction: Direction.Right,
+      x: 112,
+      y: 432,
+    },
+    {
+      direction: Direction.Up,
+      x: 496,
+      y: 528,
+    },
+    {
+      direction: Direction.Left,
+      x: 528,
+      y: 496,
+    },
+    {
+      direction: Direction.Down,
+      x: 432,
+      y: 112,
+    },
+  ];
+
   constructor() {
     super({
       key: 'GameScene',
@@ -63,6 +106,9 @@ export class GameScene extends Phaser.Scene {
     this.load.image('tiles', '../../assets/tiles.png');
     this.load.image('chicken', '../../assets/chicken.png');
     this.load.image('car', '../../assets/car.png');
+
+    // Debug
+    this.load.image('spawn', '../../assets/spawn.png');
   }
 
   public create(): void {
@@ -90,11 +136,25 @@ export class GameScene extends Phaser.Scene {
       loop: true,
     };
 
+    const chickenSpawnConfig: TimerEventConfig = {
+      callback: this.spawnChicken,
+      delay: 1000,
+      loop: true,
+    };
+
+    this.chickenSpawns.forEach(spawn => {
+      const { x, y } = spawn;
+      const sprite = this.add.sprite(x, y, 'spawn');
+      sprite.setScale(2, 2);
+    });
+
     this.time.addEvent(carSpawnConfig);
+    this.time.addEvent(chickenSpawnConfig);
   }
 
   public update(): void {
     this.cars.forEach(car => car.move());
+    this.chickens.forEach(chicken => chicken.move());
   }
 
   private positionCamera(): void {
@@ -110,5 +170,16 @@ export class GameScene extends Phaser.Scene {
     const car = new Car(this, x, y, 'car', direction);
     car.setOrigin(0.5, 0);
     this.cars.push(car);
+  };
+
+  private spawnChicken = () => {
+    const randomSpawnIndex = Math.floor(
+      Math.random() * this.chickenSpawns.length,
+    );
+    const spawn = this.chickenSpawns[randomSpawnIndex];
+    const { x, y, direction } = spawn;
+    const chicken = new Chicken(this, x, y, 'chicken', direction);
+    chicken.setOrigin(0.5, 0);
+    this.chickens.push(chicken);
   };
 }
