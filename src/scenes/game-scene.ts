@@ -10,49 +10,49 @@ export class GameScene extends Phaser.Scene {
     {
       direction: Direction.Right,
       x: 0,
-      y: 275,
+      y: 225,
     },
     {
       direction: Direction.Right,
       x: 0,
-      y: 305,
+      y: 257,
     },
     {
       direction: Direction.Left,
       x: 640,
-      y: 335,
+      y: 415,
     },
     {
       direction: Direction.Left,
       x: 640,
-      y: 365,
-    },
-    {
-      direction: Direction.Down,
-      x: 275,
-      y: 0,
-    },
-    {
-      direction: Direction.Down,
-      x: 305,
-      y: 0,
-    },
-    {
-      direction: Direction.Up,
-      x: 335,
-      y: 640,
-    },
-    {
-      direction: Direction.Up,
-      x: 365,
-      y: 640,
+      y: 383,
     },
   ];
 
   private chickenSpawns = [
     {
       direction: Direction.Down,
-      x: 144,
+      x: 176,
+      y: 112,
+    },
+    {
+      direction: Direction.Down,
+      x: 240,
+      y: 112,
+    },
+    {
+      direction: Direction.Down,
+      x: 304,
+      y: 112,
+    },
+    {
+      direction: Direction.Down,
+      x: 368,
+      y: 112,
+    },
+    {
+      direction: Direction.Down,
+      x: 432,
       y: 112,
     },
     {
@@ -61,34 +61,24 @@ export class GameScene extends Phaser.Scene {
       y: 528,
     },
     {
-      direction: Direction.Right,
-      x: 112,
-      y: 144,
-    },
-    {
-      direction: Direction.Left,
-      x: 528,
-      y: 208,
-    },
-    {
-      direction: Direction.Right,
-      x: 112,
-      y: 432,
-    },
-    {
       direction: Direction.Up,
-      x: 496,
+      x: 272,
       y: 528,
     },
     {
-      direction: Direction.Left,
-      x: 528,
-      y: 496,
+      direction: Direction.Up,
+      x: 336,
+      y: 528,
     },
     {
-      direction: Direction.Down,
-      x: 432,
-      y: 112,
+      direction: Direction.Up,
+      x: 400,
+      y: 528,
+    },
+    {
+      direction: Direction.Up,
+      x: 464,
+      y: 528,
     },
   ];
 
@@ -123,9 +113,11 @@ export class GameScene extends Phaser.Scene {
     });
 
     const tileset = map.addTilesetImage('tiles');
-    const staticLayer = map.createStaticLayer('Background', tileset, 0, 0);
+    const backgroundLayer = map.createStaticLayer('Background', tileset, 0, 0);
+    const roadLayer = map.createStaticLayer('Road', tileset, 0, 0);
     const coopLayer = map.createStaticLayer('Coops', tileset, 0, 0);
-    staticLayer.setScale(2, 2);
+    backgroundLayer.setScale(2, 2);
+    roadLayer.setScale(2, 2);
     coopLayer.setScale(2, 2);
 
     this.positionCamera();
@@ -143,6 +135,12 @@ export class GameScene extends Phaser.Scene {
     };
 
     this.chickenSpawns.forEach(spawn => {
+      const { x, y } = spawn;
+      const sprite = this.add.sprite(x, y, 'spawn');
+      sprite.setScale(2, 2);
+    });
+
+    this.carSpawns.forEach(spawn => {
       const { x, y } = spawn;
       const sprite = this.add.sprite(x, y, 'spawn');
       sprite.setScale(2, 2);
