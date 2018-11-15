@@ -104,8 +104,6 @@ export class GameScene extends Phaser.Scene {
   public create(): void {
     this.cameras.main.setViewport(0, 0, 640, 640);
 
-    this.add.text(10, 10, 'Game Scene');
-
     const map = this.make.tilemap({
       key: 'map',
       tileHeight: mapJson.tileheight,
@@ -130,7 +128,7 @@ export class GameScene extends Phaser.Scene {
 
     const chickenSpawnConfig: TimerEventConfig = {
       callback: this.spawnChicken,
-      delay: 1000,
+      delay: 5000,
       loop: true,
     };
 
@@ -148,6 +146,9 @@ export class GameScene extends Phaser.Scene {
 
     this.time.addEvent(carSpawnConfig);
     this.time.addEvent(chickenSpawnConfig);
+    this.spawnChicken();
+
+    this.add.text(10, 10, 'Score: 0');
   }
 
   public update(): void {

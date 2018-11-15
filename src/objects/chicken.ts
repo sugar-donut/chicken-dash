@@ -4,6 +4,7 @@ export class Chicken extends Phaser.GameObjects.Sprite {
   private direction: Direction;
   private isPointerDown: boolean = false;
   private speed: integer = 1;
+  private runOffset: integer = 60;
 
   constructor(scene, x, y, texture, direction, frame?) {
     super(scene, x, y, texture, frame);
@@ -44,13 +45,31 @@ export class Chicken extends Phaser.GameObjects.Sprite {
   private handlePointerDown = (): void => {
     this.isPointerDown = true;
     this.alpha = 0.5;
-    this.speed = 3;
   };
 
   private handlePointerUp = (event): void => {
+    const { downY, upY } = event;
+
     if (this.isPointerDown) {
       this.isPointerDown = false;
       this.alpha = 1;
+
+      if (this.direction === Direction.Up && downY - this.runOffset > upY) {
+        this.speed = 2;
+        return;
+      } else if (
+        this.direction === Direction.Down &&
+        downY + this.runOffset < upY
+      ) {
+        this.speed = 2;
+        return;
+      } else {
+        if (this.speed === 0) {
+          this.speed = 1;
+        } else {
+          this.speed = 0;
+        }
+      }
     }
   };
 }
