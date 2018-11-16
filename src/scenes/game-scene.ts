@@ -111,12 +111,10 @@ export class GameScene extends Phaser.Scene {
     });
 
     const tileset = map.addTilesetImage('tiles');
-    const backgroundLayer = map.createStaticLayer('Background', tileset, 0, 0);
-    const roadLayer = map.createStaticLayer('Road', tileset, 0, 0);
-    const coopLayer = map.createStaticLayer('Coops', tileset, 0, 0);
-    backgroundLayer.setScale(2, 2);
+    const roadLayer = map.createStaticLayer('road', tileset, 0, 0);
+    const grassLayer = map.createStaticLayer('grass', tileset, 0, 0);
     roadLayer.setScale(2, 2);
-    coopLayer.setScale(2, 2);
+    grassLayer.setScale(2, 2);
 
     this.positionCamera();
 
