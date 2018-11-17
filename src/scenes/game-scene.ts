@@ -10,31 +10,31 @@ export class GameScene extends Phaser.Scene {
     {
       direction: Direction.Right,
       x: 0,
-      y: 225,
+      y: 273,
     },
     {
       direction: Direction.Right,
       x: 0,
-      y: 257,
+      y: 305,
     },
     {
       direction: Direction.Left,
       x: 640,
-      y: 415,
+      y: 399,
     },
     {
       direction: Direction.Left,
       x: 640,
-      y: 383,
+      y: 367,
     },
   ];
 
   private chickenSpawns = [
-    {
-      direction: Direction.Down,
-      x: 176,
-      y: 112,
-    },
+    // {
+    //   direction: Direction.Down,
+    //   x: 176,
+    //   y: 112,
+    // },
     {
       direction: Direction.Down,
       x: 240,
@@ -55,11 +55,11 @@ export class GameScene extends Phaser.Scene {
       x: 432,
       y: 112,
     },
-    {
-      direction: Direction.Up,
-      x: 208,
-      y: 528,
-    },
+    // {
+    //   direction: Direction.Up,
+    //   x: 208,
+    //   y: 528,
+    // },
     {
       direction: Direction.Up,
       x: 272,
@@ -75,11 +75,11 @@ export class GameScene extends Phaser.Scene {
       x: 400,
       y: 528,
     },
-    {
-      direction: Direction.Up,
-      x: 464,
-      y: 528,
-    },
+    // {
+    //   direction: Direction.Up,
+    //   x: 464,
+    //   y: 528,
+    // },
   ];
 
   constructor() {
@@ -120,13 +120,13 @@ export class GameScene extends Phaser.Scene {
 
     const carSpawnConfig: TimerEventConfig = {
       callback: this.spawnCar,
-      delay: 1000,
+      delay: 2000,
       loop: true,
     };
 
     const chickenSpawnConfig: TimerEventConfig = {
       callback: this.spawnChicken,
-      delay: 5000,
+      delay: 2000,
       loop: true,
     };
 
