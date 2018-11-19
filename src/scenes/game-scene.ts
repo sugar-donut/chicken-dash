@@ -4,6 +4,12 @@ import { Car } from '../objects/car';
 import { Chicken } from '../objects/chicken';
 
 export class GameScene extends Phaser.Scene {
+  private score: number = 0;
+  private scoreText: Phaser.GameObjects.Text;
+
+  private chickenGroup: Phaser.Physics.Arcade.Group;
+  private carGroup: Phaser.Physics.Arcade.Group;
+
   private cars: Car[] = [];
   private chickens: Chicken[] = [];
   private carSpawns = [
@@ -127,16 +133,33 @@ export class GameScene extends Phaser.Scene {
       sprite.setScale(2, 2);
     });
 
+    this.physics.systems.start(Phaser.Physics.Arcade);
+
+    this.chickenGroup = this.physics.add.group();
+    this.carGroup = this.physics.add.group();
+    this.physics.add.group();
+    this.physics.add.collider(
+      this.chickenGroup,
+      this.carGroup,
+      this.handleChickenCollision,
+      null,
+      this,
+    );
+
     this.time.addEvent(carSpawnConfig);
     this.time.addEvent(chickenSpawnConfig);
-    this.spawnChicken();
 
-    this.add.text(10, 10, 'Score: 0');
+    this.scoreText = this.add.text(10, 10, `Score: ${this.score}`);
   }
 
   public update(): void {
     this.cars.forEach(car => car.move());
     this.chickens.forEach(chicken => chicken.move());
+  }
+
+  private handleChickenCollision(chicken: Chicken, car: Car): void {
+    chicken.hit();
+    this.scene.pause();
   }
 
   private positionCamera(): void {
@@ -151,6 +174,7 @@ export class GameScene extends Phaser.Scene {
     const { x, y, direction } = spawn;
     const car = new Car(this, x, y, 'car', direction);
     car.setOrigin(0.5, 0);
+    this.carGroup.add(car);
     this.cars.push(car);
   };
 
@@ -162,6 +186,7 @@ export class GameScene extends Phaser.Scene {
     const { x, y, direction } = spawn;
     const chicken = new Chicken(this, x, y, 'chicken', direction);
     chicken.setOrigin(0.5, 0);
+    this.chickenGroup.add(chicken);
     this.chickens.push(chicken);
   };
 }

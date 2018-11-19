@@ -4,6 +4,9 @@ import { MainMenuScene } from './scenes/main-menu-scene';
 export const config: GameConfig = {
   height: window.innerHeight,
   parent: 'game',
+  physics: {
+    default: 'arcade',
+  },
   render: {
     pixelArt: true,
   },

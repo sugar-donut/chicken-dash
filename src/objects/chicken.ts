@@ -5,6 +5,7 @@ export class Chicken extends Phaser.GameObjects.Sprite {
   private isPointerDown: boolean = false;
   private speed: integer = 1;
   private runOffset: integer = 60;
+  private isDead = false;
 
   constructor(scene, x, y, texture, direction, frame?) {
     super(scene, x, y, texture, frame);
@@ -25,7 +26,16 @@ export class Chicken extends Phaser.GameObjects.Sprite {
     return this.direction;
   }
 
+  public hit(): void {
+    this.isDead = true;
+    this.body = null;
+  }
+
   public move() {
+    if (this.isDead) {
+      return;
+    }
+
     switch (this.direction) {
       case Direction.Up:
         this.setPosition(this.x, this.y - this.speed);
