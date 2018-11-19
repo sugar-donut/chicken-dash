@@ -30,11 +30,6 @@ export class GameScene extends Phaser.Scene {
   ];
 
   private chickenSpawns = [
-    // {
-    //   direction: Direction.Down,
-    //   x: 176,
-    //   y: 112,
-    // },
     {
       direction: Direction.Down,
       x: 401,
@@ -55,11 +50,6 @@ export class GameScene extends Phaser.Scene {
       x: 593,
       y: 16,
     },
-    // {
-    //   direction: Direction.Up,
-    //   x: 208,
-    //   y: 528,
-    // },
     {
       direction: Direction.Up,
       x: 433,
@@ -75,11 +65,6 @@ export class GameScene extends Phaser.Scene {
       x: 561,
       y: 528,
     },
-    // {
-    //   direction: Direction.Up,
-    //   x: 464,
-    //   y: 528,
-    // },
   ];
 
   constructor() {
