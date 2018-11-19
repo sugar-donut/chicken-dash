@@ -9,23 +9,23 @@ export class GameScene extends Phaser.Scene {
   private carSpawns = [
     {
       direction: Direction.Right,
-      x: 0,
-      y: 273,
+      x: 16,
+      y: 209,
     },
     {
       direction: Direction.Right,
-      x: 0,
-      y: 305,
+      x: 16,
+      y: 241,
     },
     {
       direction: Direction.Left,
-      x: 640,
-      y: 399,
+      x: 976,
+      y: 335,
     },
     {
       direction: Direction.Left,
-      x: 640,
-      y: 367,
+      x: 976,
+      y: 303,
     },
   ];
 
@@ -37,23 +37,23 @@ export class GameScene extends Phaser.Scene {
     // },
     {
       direction: Direction.Down,
-      x: 240,
-      y: 112,
+      x: 401,
+      y: 16,
     },
     {
       direction: Direction.Down,
-      x: 304,
-      y: 112,
+      x: 465,
+      y: 16,
     },
     {
       direction: Direction.Down,
-      x: 368,
-      y: 112,
+      x: 529,
+      y: 16,
     },
     {
       direction: Direction.Down,
-      x: 432,
-      y: 112,
+      x: 593,
+      y: 16,
     },
     // {
     //   direction: Direction.Up,
@@ -62,17 +62,17 @@ export class GameScene extends Phaser.Scene {
     // },
     {
       direction: Direction.Up,
-      x: 272,
+      x: 433,
       y: 528,
     },
     {
       direction: Direction.Up,
-      x: 336,
+      x: 497,
       y: 528,
     },
     {
       direction: Direction.Up,
-      x: 400,
+      x: 561,
       y: 528,
     },
     // {
@@ -102,7 +102,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    this.cameras.main.setViewport(0, 0, 640, 640);
+    this.cameras.main.setViewport(0, 0, 992, 544);
 
     const map = this.make.tilemap({
       key: 'map',
@@ -111,10 +111,10 @@ export class GameScene extends Phaser.Scene {
     });
 
     const tileset = map.addTilesetImage('tiles');
-    const roadLayer = map.createStaticLayer('road', tileset, 0, 0);
-    const grassLayer = map.createStaticLayer('grass', tileset, 0, 0);
-    roadLayer.setScale(2, 2);
-    grassLayer.setScale(2, 2);
+    const backgroundLayer = map.createStaticLayer('Background', tileset, 0, 0);
+    const objectLayer = map.createStaticLayer('Objects', tileset, 0, 0);
+    backgroundLayer.setScale(2, 2);
+    objectLayer.setScale(2, 2);
 
     this.positionCamera();
 
