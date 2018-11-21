@@ -159,7 +159,8 @@ export class GameScene extends Phaser.Scene {
 
   private handleChickenCollision(chicken: Chicken, car: Car): void {
     chicken.hit();
-    this.scene.pause();
+    this.cameras.main.flash(300, 255, 255, 255);
+    this.cameras.main.shake(500, 0.03);
   }
 
   private positionCamera(): void {
