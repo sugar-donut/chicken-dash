@@ -17,9 +17,8 @@ export class Chicken extends Phaser.GameObjects.Sprite {
   }
 
   public setDirection(direction: Direction) {
-    const radians = (direction * 90 * Math.PI) / 180;
     this.direction = direction;
-    this.setRotation(radians);
+    this.setFlipY(this.direction === Direction.Down);
   }
 
   public getDirection(): Direction {
