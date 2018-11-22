@@ -117,7 +117,7 @@ export class GameScene extends Phaser.Scene {
 
     const chickenSpawnConfig: TimerEventConfig = {
       callback: this.spawnChicken,
-      delay: 2000,
+      delay: 5000,
       loop: true,
     };
 
@@ -159,6 +159,8 @@ export class GameScene extends Phaser.Scene {
 
   private handleChickenCollision(chicken: Chicken, car: Car): void {
     chicken.hit();
+    chicken.body = null;
+    chicken.destroy();
     this.cameras.main.flash(300, 255, 255, 255);
     this.cameras.main.shake(500, 0.03);
   }
@@ -174,7 +176,6 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.carSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const car = new Car(this, x, y, 'car', direction);
-    car.setOrigin(0.5, 0);
     this.carGroup.add(car);
     this.cars.push(car);
   };
@@ -186,7 +187,6 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.chickenSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const chicken = new Chicken(this, x, y, 'chicken', direction);
-    chicken.setOrigin(0.5, 0);
     this.chickenGroup.add(chicken);
     this.chickens.push(chicken);
   };

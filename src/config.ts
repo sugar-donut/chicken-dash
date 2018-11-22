@@ -5,6 +5,9 @@ export const config: GameConfig = {
   height: window.innerHeight,
   parent: 'game',
   physics: {
+    arcade: {
+      debug: false,
+    },
     default: 'arcade',
   },
   render: {
