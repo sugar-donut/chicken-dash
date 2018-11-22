@@ -16,22 +16,22 @@ export class GameScene extends Phaser.Scene {
     {
       direction: Direction.Right,
       x: 16,
-      y: 209,
+      y: 208,
     },
     {
       direction: Direction.Right,
       x: 16,
-      y: 241,
+      y: 240,
     },
     {
       direction: Direction.Left,
       x: 976,
-      y: 335,
+      y: 336,
     },
     {
       direction: Direction.Left,
       x: 976,
-      y: 303,
+      y: 304,
     },
   ];
 
