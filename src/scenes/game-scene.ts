@@ -16,22 +16,22 @@ export class GameScene extends Phaser.Scene {
     {
       direction: Direction.Right,
       x: 16,
-      y: 209,
+      y: 208,
     },
     {
       direction: Direction.Right,
       x: 16,
-      y: 241,
+      y: 240,
     },
     {
       direction: Direction.Left,
       x: 976,
-      y: 335,
+      y: 336,
     },
     {
       direction: Direction.Left,
       x: 976,
-      y: 303,
+      y: 304,
     },
   ];
 
@@ -111,7 +111,7 @@ export class GameScene extends Phaser.Scene {
 
     const carSpawnConfig: TimerEventConfig = {
       callback: this.spawnCar,
-      delay: 2000,
+      delay: 3000,
       loop: true,
     };
 
@@ -176,6 +176,8 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.carSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const car = new Car(this, x, y, 'car', direction);
+    car.setSize(32, 32);
+    car.setDisplaySize(32, 32);
     this.carGroup.add(car);
     this.cars.push(car);
   };

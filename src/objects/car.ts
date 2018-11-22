@@ -12,6 +12,7 @@ export class Car extends Phaser.GameObjects.Sprite {
 
   public setDirection(direction: Direction) {
     this.direction = direction;
+    this.setFlipX(this.direction === Direction.Left);
   }
 
   public move() {
