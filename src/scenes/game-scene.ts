@@ -174,7 +174,8 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.carSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const car = new Car(this, x, y, 'car', direction);
-    car.setOrigin(0.5, 0);
+    car.setSize(32, 32);
+    car.setDisplaySize(32, 32);
     this.carGroup.add(car);
     this.cars.push(car);
   };
