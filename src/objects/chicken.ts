@@ -18,7 +18,12 @@ export class Chicken extends Phaser.GameObjects.Sprite {
 
   public setDirection(direction: Direction) {
     this.direction = direction;
-    this.setFlipY(this.direction === Direction.Down);
+
+    if (this.direction === Direction.Up) {
+      this.play('chicken-up-walking');
+    } else {
+      this.play('chicken-down-walking');
+    }
   }
 
   public getDirection(): Direction {

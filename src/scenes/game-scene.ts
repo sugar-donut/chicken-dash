@@ -85,8 +85,23 @@ export class GameScene extends Phaser.Scene {
   public preload(): void {
     this.load.tilemapTiledJSON('map', '../../assets/map.json');
     this.load.image('tiles', '../../assets/tiles.png');
-    this.load.image('chicken', '../../assets/chicken.png');
     this.load.image('car', '../../assets/car.png');
+    this.load.spritesheet(
+      'chicken-down-walking',
+      '../../assets/chicken-down-walking.png',
+      {
+        frameHeight: 16,
+        frameWidth: 16,
+      },
+    );
+    this.load.spritesheet(
+      'chicken-up-walking',
+      '../../assets/chicken-up-walking.png',
+      {
+        frameHeight: 16,
+        frameWidth: 16,
+      },
+    );
 
     // Debug
     this.load.image('spawn', '../../assets/spawn.png');
@@ -150,6 +165,19 @@ export class GameScene extends Phaser.Scene {
     this.time.addEvent(chickenSpawnConfig);
 
     this.scoreText = this.add.text(10, 10, `Score: ${this.score}`);
+
+    this.anims.create({
+      duration: 1400,
+      frames: this.anims.generateFrameNumbers('chicken-down-walking', {}),
+      key: 'chicken-down-walking',
+      repeat: -1,
+    });
+    this.anims.create({
+      duration: 1400,
+      frames: this.anims.generateFrameNumbers('chicken-up-walking', {}),
+      key: 'chicken-up-walking',
+      repeat: -1,
+    });
   }
 
   public update(): void {
@@ -188,7 +216,9 @@ export class GameScene extends Phaser.Scene {
     );
     const spawn = this.chickenSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
-    const chicken = new Chicken(this, x, y, 'chicken', direction);
+    const chicken = new Chicken(this, x, y, '', direction);
+    chicken.setSize(32, 32);
+    chicken.setDisplaySize(32, 32);
     this.chickenGroup.add(chicken);
     this.chickens.push(chicken);
   };
