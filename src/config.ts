@@ -13,7 +13,7 @@ export const config: GameConfig = {
   render: {
     pixelArt: true,
   },
-  scene: [GameScene, MainMenuScene],
+  scene: [MainMenuScene, GameScene],
   type: Phaser.AUTO,
   width: window.innerWidth,
 };
