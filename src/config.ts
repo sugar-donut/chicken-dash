@@ -1,5 +1,4 @@
 import { GameScene } from './scenes/game-scene';
-import { MainMenuScene } from './scenes/main-menu-scene';
 
 export const config: GameConfig = {
   height: window.innerHeight,
@@ -13,7 +12,7 @@ export const config: GameConfig = {
   render: {
     pixelArt: true,
   },
-  scene: [MainMenuScene, GameScene],
+  scene: [GameScene],
   type: Phaser.AUTO,
   width: window.innerWidth,
 };

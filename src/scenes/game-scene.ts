@@ -4,6 +4,7 @@ import { Car } from '../objects/car';
 import { Chicken } from '../objects/chicken';
 
 export class GameScene extends Phaser.Scene {
+  private isStarted: boolean = false;
   private score: number = 0;
   private scoreText: Phaser.GameObjects.Text;
 
@@ -83,6 +84,11 @@ export class GameScene extends Phaser.Scene {
   }
 
   public preload(): void {
+    // Menu
+    this.load.image('logo', '../../assets/logo.png');
+    this.load.image('start', '../../assets/start.png');
+
+    // Game
     this.load.tilemapTiledJSON('map', '../../assets/map.json');
     this.load.image('tiles', '../../assets/tiles.png');
     this.load.image('car', '../../assets/car.png');
@@ -161,9 +167,6 @@ export class GameScene extends Phaser.Scene {
       this,
     );
 
-    this.time.addEvent(carSpawnConfig);
-    this.time.addEvent(chickenSpawnConfig);
-
     this.scoreText = this.add.text(10, 10, `Score: ${this.score}`);
 
     this.anims.create({
@@ -178,6 +181,23 @@ export class GameScene extends Phaser.Scene {
       key: 'chicken-up-walking',
       repeat: -1,
     });
+
+    const logo = this.add.image(500, 100, 'logo');
+    logo.setScale(8, 8);
+
+    const startButton = this.add.image(500, 300, 'start');
+    startButton.setScale(4, 4);
+
+    startButton.setInteractive();
+    startButton.on('pointerdown', () => {
+      this.isStarted = true;
+      this.time.addEvent(chickenSpawnConfig);
+      logo.setVisible(false);
+      startButton.setInteractive(false);
+      startButton.setVisible(false);
+    });
+
+    this.time.addEvent(carSpawnConfig);
   }
 
   public update(): void {
