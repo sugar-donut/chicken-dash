@@ -16,6 +16,15 @@ export class Chicken extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
   }
 
+  public setSpeed(speed: integer): void {
+    this.speed = speed;
+    this.setAnimation();
+  }
+
+  public getSpeed(): integer {
+    return this.speed;
+  }
+
   public setDirection(direction: Direction) {
     this.direction = direction;
 
@@ -69,19 +78,19 @@ export class Chicken extends Phaser.GameObjects.Sprite {
       this.alpha = 1;
 
       if (this.direction === Direction.Up && downY - this.runOffset > upY) {
-        this.speed = 2;
+        this.setSpeed(2);
         return;
       } else if (
         this.direction === Direction.Down &&
         downY + this.runOffset < upY
       ) {
-        this.speed = 2;
+        this.setSpeed(2);
         return;
       } else {
         if (this.speed === 0) {
-          this.speed = 1;
+          this.setSpeed(1);
         } else {
-          this.speed = 0;
+          this.setSpeed(0);
         }
       }
     }
