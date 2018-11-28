@@ -5,7 +5,7 @@ export const config: GameConfig = {
   parent: 'game',
   physics: {
     arcade: {
-      debug: false,
+      debug: true,
     },
     default: 'arcade',
   },

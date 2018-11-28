@@ -167,8 +167,6 @@ export class GameScene extends Phaser.Scene {
       this,
     );
 
-    this.scoreText = this.add.text(10, 10, `Score: ${this.score}`);
-
     this.anims.create({
       duration: 1400,
       frames: this.anims.generateFrameNumbers('chicken-down-walking', {}),
@@ -182,19 +180,59 @@ export class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    const logo = this.add.image(500, 100, 'logo');
+    const menuContainer = this.add.container(0, 0);
+
+    const width = this.cameras.main.width;
+    const height = this.cameras.main.width;
+    const background = new Phaser.GameObjects.Rectangle(
+      this,
+      0,
+      0,
+      width,
+      height,
+      0,
+      0.4,
+    );
+    background.setScale(2);
+    background.setDepth(0);
+    menuContainer.add(background);
+
+    const logo = new Phaser.GameObjects.Sprite(this, 500, 200, 'logo');
+    const startButton = new Phaser.GameObjects.Sprite(this, 500, 400, 'start');
     logo.setScale(8, 8);
-
-    const startButton = this.add.image(500, 300, 'start');
     startButton.setScale(4, 4);
-
     startButton.setInteractive();
+
+    menuContainer.add(logo);
+    menuContainer.add(startButton);
+    menuContainer.setDepth(3);
+
     startButton.on('pointerdown', () => {
       this.isStarted = true;
       this.time.addEvent(chickenSpawnConfig);
-      logo.setVisible(false);
       startButton.setInteractive(false);
-      startButton.setVisible(false);
+      this.tweens.add({
+        alpha: 0,
+        duration: 1000,
+        targets: menuContainer,
+      });
+
+      const scoreContainer = this.add.container(0, 0);
+      const scoreText = new Phaser.GameObjects.Text(
+        this,
+        10,
+        10,
+        `${this.score}`,
+        null,
+      );
+      scoreText.style.setFontSize(48);
+      scoreContainer.add(scoreText);
+      scoreText.setAlpha(0);
+      this.tweens.add({
+        alpha: 1,
+        duration: 1000,
+        targets: scoreText,
+      });
     });
 
     this.time.addEvent(carSpawnConfig);
@@ -226,6 +264,7 @@ export class GameScene extends Phaser.Scene {
     const car = new Car(this, x, y, 'car', direction);
     car.setSize(32, 32);
     car.setDisplaySize(32, 32);
+    car.setDepth(1);
     this.carGroup.add(car);
     this.cars.push(car);
   };
@@ -239,6 +278,7 @@ export class GameScene extends Phaser.Scene {
     const chicken = new Chicken(this, x, y, '', direction);
     chicken.setSize(32, 32);
     chicken.setDisplaySize(32, 32);
+    chicken.setDepth(2);
     this.chickenGroup.add(chicken);
     this.chickens.push(chicken);
   };
