@@ -93,8 +93,8 @@ export class GameScene extends Phaser.Scene {
     this.load.image('tiles', '../../assets/tiles.png');
     this.load.image('car', '../../assets/car.png');
     this.load.spritesheet(
-      'chicken-down-walking',
-      '../../assets/chicken-down-walking.png',
+      'chicken-down-moving',
+      '../../assets/chicken-down-moving.png',
       {
         frameHeight: 16,
         frameWidth: 16,
@@ -109,8 +109,8 @@ export class GameScene extends Phaser.Scene {
       },
     );
     this.load.spritesheet(
-      'chicken-up-walking',
-      '../../assets/chicken-up-walking.png',
+      'chicken-up-moving',
+      '../../assets/chicken-up-moving.png',
       {
         frameHeight: 16,
         frameWidth: 16,
@@ -191,13 +191,13 @@ export class GameScene extends Phaser.Scene {
     });
     this.anims.create({
       duration: 1400,
-      frames: this.anims.generateFrameNumbers('chicken-down-walking', {}),
+      frames: this.anims.generateFrameNumbers('chicken-down-moving', {}),
       key: 'chicken-down-walking',
       repeat: -1,
     });
     this.anims.create({
       duration: 800,
-      frames: this.anims.generateFrameNumbers('chicken-down-walking', {}),
+      frames: this.anims.generateFrameNumbers('chicken-down-moving', {}),
       key: 'chicken-down-running',
       repeat: -1,
     });
@@ -209,13 +209,13 @@ export class GameScene extends Phaser.Scene {
     });
     this.anims.create({
       duration: 1400,
-      frames: this.anims.generateFrameNumbers('chicken-up-walking', {}),
+      frames: this.anims.generateFrameNumbers('chicken-up-moving', {}),
       key: 'chicken-up-walking',
       repeat: -1,
     });
     this.anims.create({
       duration: 800,
-      frames: this.anims.generateFrameNumbers('chicken-up-walking', {}),
+      frames: this.anims.generateFrameNumbers('chicken-up-moving', {}),
       key: 'chicken-up-running',
       repeat: -1,
     });
