@@ -4,6 +4,7 @@ import { Car } from '../objects/car';
 import { Chicken } from '../objects/chicken';
 
 export class GameScene extends Phaser.Scene {
+  private isGameOver: boolean = false;
   private isStarted: boolean = false;
   private score: number = 0;
   private scoreText: Phaser.GameObjects.Text;
@@ -228,7 +229,6 @@ export class GameScene extends Phaser.Scene {
     });
 
     const menuContainer = this.add.container(0, 0);
-
     const width = this.cameras.main.width;
     const height = this.cameras.main.width;
     const background = new Phaser.GameObjects.Rectangle(
@@ -246,8 +246,8 @@ export class GameScene extends Phaser.Scene {
 
     const logo = new Phaser.GameObjects.Sprite(this, 500, 200, 'logo');
     const startButton = new Phaser.GameObjects.Sprite(this, 500, 400, 'start');
-    logo.setScale(8, 8);
-    startButton.setScale(4, 4);
+    logo.setScale(10, 10);
+    startButton.setScale(6, 6);
     startButton.setInteractive();
 
     menuContainer.add(logo);
@@ -296,6 +296,56 @@ export class GameScene extends Phaser.Scene {
     chicken.destroy();
     this.cameras.main.flash(300, 255, 255, 255);
     this.cameras.main.shake(500, 0.03);
+
+    // Game over
+    if (!this.isGameOver) {
+      this.showGameOver();
+    }
+  }
+
+  private showGameOver(): void {
+    this.isGameOver = true;
+    this.isStarted = false;
+    const width = this.cameras.main.width;
+    const height = this.cameras.main.width;
+    const background = new Phaser.GameObjects.Rectangle(
+      this,
+      0,
+      0,
+      width,
+      height,
+      0,
+      0.4,
+    );
+    background.setScale(2);
+    const gameOverContainer = this.add.container(0, 0);
+    gameOverContainer.setDepth(4);
+    gameOverContainer.add(background);
+
+    const scoreBox = new Phaser.GameObjects.Rectangle(
+      this,
+      0,
+      0,
+      300,
+      150,
+      0xffffff,
+      0.8,
+    );
+    scoreBox.alpha = 1;
+    scoreBox.setPosition(width / 2, 250);
+
+    const score = new Phaser.GameObjects.Text(
+      this,
+      width / 2,
+      300,
+      `Score: ${this.score}`,
+      null,
+    );
+    score.setColor('#000000');
+
+    gameOverContainer.add(scoreBox);
+    gameOverContainer.add(score);
+    this.time.removeAllEvents();
   }
 
   private positionCamera(): void {
