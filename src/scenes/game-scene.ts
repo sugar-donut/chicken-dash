@@ -94,10 +94,12 @@ export class GameScene extends Phaser.Scene {
     this.load.image('tiles', '../../assets/tiles.png');
 
     // Cars
-    this.load.image('car', '../../assets/car.png');
+    this.load.image('bus', '../../assets/bus.png');
     this.load.image('pickup', '../../assets/pickup.png');
     this.load.image('police', '../../assets/police.png');
     this.load.image('taxi', '../../assets/taxi.png');
+    this.load.image('sport', '../../assets/sport.png');
+    this.load.image('hatchback', '../../assets/hatchback.png');
 
     // Chickens
     this.load.spritesheet(
