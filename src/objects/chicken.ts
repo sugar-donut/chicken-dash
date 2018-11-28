@@ -13,6 +13,7 @@ export class Chicken extends Phaser.GameObjects.Sprite {
     this.on('pointerdown', this.handlePointerDown);
     this.scene.input.on('pointerup', this.handlePointerUp);
     this.setDirection(direction);
+    this.setAnimation();
     scene.add.existing(this);
   }
 
@@ -27,12 +28,6 @@ export class Chicken extends Phaser.GameObjects.Sprite {
 
   public setDirection(direction: Direction) {
     this.direction = direction;
-
-    if (this.direction === Direction.Up) {
-      this.play('chicken-up-walking');
-    } else {
-      this.play('chicken-down-walking');
-    }
   }
 
   public getDirection(): Direction {
@@ -93,6 +88,22 @@ export class Chicken extends Phaser.GameObjects.Sprite {
           this.setSpeed(0);
         }
       }
+    }
+  };
+
+  private setAnimation = (): void => {
+    const direction = this.direction === Direction.Up ? 'up' : 'down';
+
+    switch (this.speed) {
+      case 0:
+        this.play(`chicken-${direction}-idle`);
+        break;
+      case 1:
+        this.play(`chicken-${direction}-walking`);
+        break;
+      case 2:
+        this.play(`chicken-${direction}-running`);
+        break;
     }
   };
 }
