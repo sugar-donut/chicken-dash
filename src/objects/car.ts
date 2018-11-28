@@ -3,11 +3,13 @@ import { Direction } from '../enums/direction';
 export class Car extends Phaser.GameObjects.Sprite {
   private direction: Direction = Direction.Down;
   private speed: integer = 1.5;
+  private textures = ['car', 'pickup', 'taxi', 'police'];
 
   constructor(scene, x, y, texture, direction, frame?) {
     super(scene, x, y, texture, frame);
     this.setDirection(direction);
     scene.add.existing(this);
+    this.setRandomTexture();
   }
 
   public setDirection(direction: Direction) {
@@ -30,5 +32,12 @@ export class Car extends Phaser.GameObjects.Sprite {
         this.setPosition(this.x - this.speed, this.y);
         break;
     }
+  }
+
+  private setRandomTexture(): void {
+    const randomTexture = this.textures[
+      Math.floor(Math.random() * this.textures.length)
+    ];
+    this.setTexture(randomTexture);
   }
 }
