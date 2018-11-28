@@ -98,6 +98,7 @@ export class GameScene extends Phaser.Scene {
     this.load.image('police', '../../assets/police.png');
     this.load.image('taxi', '../../assets/taxi.png');
     this.load.image('sport', '../../assets/sport.png');
+    this.load.image('hatchback', '../../assets/hatchback.png');
 
     // Chickens
     this.load.spritesheet(
