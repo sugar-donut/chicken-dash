@@ -91,7 +91,14 @@ export class GameScene extends Phaser.Scene {
     // Game
     this.load.tilemapTiledJSON('map', '../../assets/map.json');
     this.load.image('tiles', '../../assets/tiles.png');
+
+    // Cars
     this.load.image('car', '../../assets/car.png');
+    this.load.image('pickup', '../../assets/pickup.png');
+    this.load.image('police', '../../assets/police.png');
+    this.load.image('taxi', '../../assets/taxi.png');
+
+    // Chickens
     this.load.spritesheet(
       'chicken-down-moving',
       '../../assets/chicken-down-moving.png',
