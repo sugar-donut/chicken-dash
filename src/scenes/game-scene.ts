@@ -88,6 +88,8 @@ export class GameScene extends Phaser.Scene {
     // Menu
     this.load.image('logo', '../../assets/logo.png');
     this.load.image('start', '../../assets/start.png');
+    this.load.image('game-over', '../../assets/game-over.png');
+    this.load.image('restart', '../../assets/restart.png');
 
     // Game
     this.load.tilemapTiledJSON('map', '../../assets/map.json');
@@ -345,8 +347,22 @@ export class GameScene extends Phaser.Scene {
     );
     score.setColor('#000000');
 
+    const gameOver = new Phaser.GameObjects.Sprite(this, 500, 200, 'game-over');
+    gameOver.setScale(10, 10);
+    const restartButton = new Phaser.GameObjects.Sprite(
+      this,
+      500,
+      400,
+      'restart',
+    );
+    restartButton.setScale(4, 4);
+    restartButton.setInteractive();
+    restartButton.input.cursor = 'pointer';
+
     gameOverContainer.add(scoreBox);
     gameOverContainer.add(score);
+    gameOverContainer.add(gameOver);
+    gameOverContainer.add(restartButton);
     this.time.removeAllEvents();
   }
 
