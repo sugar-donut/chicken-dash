@@ -14,6 +14,7 @@ export class Chicken extends Phaser.GameObjects.Sprite {
     this.scene.input.on('pointerup', this.handlePointerUp);
     this.setDirection(direction);
     this.setAnimation();
+    this.input.cursor = 'pointer';
     scene.add.existing(this);
   }
 
