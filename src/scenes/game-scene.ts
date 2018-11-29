@@ -11,28 +11,29 @@ export class GameScene extends Phaser.Scene {
 
   private chickenGroup: Phaser.Physics.Arcade.Group;
   private carGroup: Phaser.Physics.Arcade.Group;
+  private safeGroup: Phaser.Physics.Arcade.Group;
 
   private cars: Car[] = [];
   private chickens: Chicken[] = [];
   private carSpawns = [
     {
       direction: Direction.Right,
-      x: 16,
+      x: -16,
       y: 208,
     },
     {
       direction: Direction.Right,
-      x: 16,
+      x: -16,
       y: 240,
     },
     {
       direction: Direction.Left,
-      x: 976,
+      x: 1008,
       y: 336,
     },
     {
       direction: Direction.Left,
-      x: 976,
+      x: 1008,
       y: 304,
     },
   ];
@@ -41,37 +42,68 @@ export class GameScene extends Phaser.Scene {
     {
       direction: Direction.Down,
       x: 401,
-      y: 16,
+      y: -16,
     },
     {
       direction: Direction.Down,
       x: 465,
-      y: 16,
+      y: -16,
     },
     {
       direction: Direction.Down,
       x: 529,
-      y: 16,
+      y: -16,
     },
     {
       direction: Direction.Down,
       x: 593,
-      y: 16,
+      y: -16,
     },
     {
       direction: Direction.Up,
       x: 433,
-      y: 528,
+      y: 560,
     },
     {
       direction: Direction.Up,
       x: 497,
-      y: 528,
+      y: 560,
     },
     {
       direction: Direction.Up,
       x: 561,
+      y: 560,
+    },
+  ];
+
+  private chickenSafePoints = [
+    {
+      x: 401,
       y: 528,
+    },
+    {
+      x: 465,
+      y: 528,
+    },
+    {
+      x: 529,
+      y: 528,
+    },
+    {
+      x: 593,
+      y: 528,
+    },
+    {
+      x: 433,
+      y: 16,
+    },
+    {
+      x: 497,
+      y: 16,
+    },
+    {
+      x: 561,
+      y: 16,
     },
   ];
 
@@ -184,11 +216,27 @@ export class GameScene extends Phaser.Scene {
 
     this.chickenGroup = this.physics.add.group();
     this.carGroup = this.physics.add.group();
-    this.physics.add.group();
+    this.safeGroup = this.physics.add.group();
+
+    this.chickenSafePoints.forEach(safePoint => {
+      const { x, y } = safePoint;
+      const sprite = new Phaser.GameObjects.Sprite(this, x, y, 'spawn');
+      this.safeGroup.add(sprite);
+      sprite.setScale(2, 2);
+    });
+
     this.physics.add.collider(
       this.chickenGroup,
       this.carGroup,
       this.handleChickenCollision,
+      null,
+      this,
+    );
+
+    this.physics.add.collider(
+      this.chickenGroup,
+      this.safeGroup,
+      this.handleChickenSafe,
       null,
       this,
     );
@@ -267,20 +315,20 @@ export class GameScene extends Phaser.Scene {
       });
 
       const scoreContainer = this.add.container(0, 0);
-      const scoreText = new Phaser.GameObjects.Text(
+      this.scoreText = new Phaser.GameObjects.Text(
         this,
         10,
         10,
         `${this.score}`,
         null,
       );
-      scoreText.style.setFontSize(48);
-      scoreContainer.add(scoreText);
-      scoreText.setAlpha(0);
+      this.scoreText.style.setFontSize(48);
+      scoreContainer.add(this.scoreText);
+      this.scoreText.setAlpha(0);
       this.tweens.add({
         alpha: 1,
         duration: 1000,
-        targets: scoreText,
+        targets: this.scoreText,
       });
     });
 
@@ -303,6 +351,15 @@ export class GameScene extends Phaser.Scene {
     if (!this.isGameOver) {
       this.showGameOver();
     }
+  }
+
+  private handleChickenSafe(chicken: Chicken): void {
+    if (!this.isGameOver) {
+      this.score += 1;
+      this.scoreText.setText(`${this.score}`);
+    }
+    chicken.body = null;
+    chicken.destroy();
   }
 
   private showGameOver(): void {
