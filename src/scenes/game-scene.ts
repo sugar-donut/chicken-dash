@@ -291,7 +291,7 @@ export class GameScene extends Phaser.Scene {
       width,
       height,
       0,
-      0.4,
+      0.6,
     );
     background.setScale(2);
     background.setDepth(0);
@@ -380,6 +380,7 @@ export class GameScene extends Phaser.Scene {
   private showGameOver(): void {
     this.isGameOver = true;
     this.isStarted = false;
+    this.scoreText.setVisible(false);
     const width = this.cameras.main.width;
     const height = this.cameras.main.width;
     const background = new Phaser.GameObjects.Rectangle(
@@ -389,39 +390,29 @@ export class GameScene extends Phaser.Scene {
       width,
       height,
       0,
-      0.4,
+      0.6,
     );
     background.setScale(2);
     const gameOverContainer = this.add.container(0, 0);
     gameOverContainer.setDepth(4);
     gameOverContainer.add(background);
 
-    const scoreBox = new Phaser.GameObjects.Rectangle(
-      this,
-      0,
-      0,
-      300,
-      150,
-      0xffffff,
-      0.8,
-    );
-    scoreBox.alpha = 1;
-    scoreBox.setPosition(width / 2, 250);
-
     const score = new Phaser.GameObjects.Text(
       this,
       width / 2,
-      300,
+      350,
       `Score: ${this.score}`,
       null,
     );
-    score.setColor('#000000');
+    score.setFontSize(48);
+    score.setColor('#ffffff');
+    score.setOrigin(0.5, 1);
 
     const gameOver = new Phaser.GameObjects.Sprite(this, 500, 200, 'game-over');
     gameOver.setScale(10, 10);
     const restartButton = new Phaser.GameObjects.Sprite(
       this,
-      500,
+      width / 2,
       400,
       'restart',
     );
@@ -429,7 +420,6 @@ export class GameScene extends Phaser.Scene {
     restartButton.setInteractive();
     restartButton.input.cursor = 'pointer';
 
-    gameOverContainer.add(scoreBox);
     gameOverContainer.add(score);
     gameOverContainer.add(gameOver);
     gameOverContainer.add(restartButton);
