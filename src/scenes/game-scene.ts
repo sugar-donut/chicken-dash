@@ -87,6 +87,7 @@ export class GameScene extends Phaser.Scene {
   public preload(): void {
     // Menu
     this.load.image('logo', '../../assets/logo.png');
+    this.load.image('tutorial', '../../assets/tutorial.png');
     this.load.image('start', '../../assets/start.png');
     this.load.image('game-over', '../../assets/game-over.png');
     this.load.image('restart', '../../assets/restart.png');
@@ -249,13 +250,25 @@ export class GameScene extends Phaser.Scene {
     menuContainer.add(background);
 
     const logo = new Phaser.GameObjects.Sprite(this, 500, 200, 'logo');
-    const startButton = new Phaser.GameObjects.Sprite(this, 500, 400, 'start');
+    const startButton = new Phaser.GameObjects.Sprite(this, 500, 380, 'start');
     logo.setScale(10, 10);
-    startButton.setScale(6, 6);
+    startButton.setScale(4, 4);
     startButton.setInteractive();
+    startButton.input.cursor = 'pointer';
+
+    const tutorialButton = new Phaser.GameObjects.Sprite(
+      this,
+      500,
+      450,
+      'tutorial',
+    );
+    tutorialButton.setScale(4, 4);
+    tutorialButton.setInteractive();
+    tutorialButton.input.cursor = 'pointer';
 
     menuContainer.add(logo);
     menuContainer.add(startButton);
+    menuContainer.add(tutorialButton);
     menuContainer.setDepth(3);
 
     startButton.on('pointerdown', () => {
