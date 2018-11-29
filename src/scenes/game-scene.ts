@@ -8,6 +8,7 @@ export class GameScene extends Phaser.Scene {
   private isStarted: boolean = false;
   private score: number = 0;
   private scoreText: Phaser.GameObjects.Text;
+  private gameOverContainer: Phaser.GameObjects.Container;
 
   private chickenGroup: Phaser.Physics.Arcade.Group;
   private carGroup: Phaser.Physics.Arcade.Group;
@@ -383,6 +384,35 @@ export class GameScene extends Phaser.Scene {
     chicken.destroy();
   }
 
+  private handleRestartButtonClick = (): void => {
+    this.resetGame();
+    this.tweens.add({
+      alpha: 0,
+      duration: 1000,
+      targets: this.gameOverContainer,
+    });
+    const carSpawnConfig: TimerEventConfig = {
+      callback: this.spawnCar,
+      delay: 3000,
+      loop: true,
+    };
+
+    const chickenSpawnConfig: TimerEventConfig = {
+      callback: this.spawnChicken,
+      delay: 5000,
+      loop: true,
+    };
+    this.time.addEvent(chickenSpawnConfig);
+    this.time.addEvent(carSpawnConfig);
+  };
+
+  private resetGame() {
+    this.isGameOver = false;
+    this.score = 0;
+    this.scoreText.setText(`${this.score}`);
+    this.scoreText.setVisible(true);
+  }
+
   private showGameOver(): void {
     this.isGameOver = true;
     this.isStarted = false;
@@ -399,9 +429,9 @@ export class GameScene extends Phaser.Scene {
       0.6,
     );
     background.setScale(2);
-    const gameOverContainer = this.add.container(0, 0);
-    gameOverContainer.setDepth(4);
-    gameOverContainer.add(background);
+    this.gameOverContainer = this.add.container(0, 0);
+    this.gameOverContainer.setDepth(4);
+    this.gameOverContainer.add(background);
 
     const score = new Phaser.GameObjects.Text(
       this,
@@ -424,11 +454,12 @@ export class GameScene extends Phaser.Scene {
     );
     restartButton.setScale(4, 4);
     restartButton.setInteractive();
+    restartButton.addListener('pointerdown', this.handleRestartButtonClick);
     restartButton.input.cursor = 'pointer';
 
-    gameOverContainer.add(score);
-    gameOverContainer.add(gameOver);
-    gameOverContainer.add(restartButton);
+    this.gameOverContainer.add(score);
+    this.gameOverContainer.add(gameOver);
+    this.gameOverContainer.add(restartButton);
     this.time.removeAllEvents();
   }
 
