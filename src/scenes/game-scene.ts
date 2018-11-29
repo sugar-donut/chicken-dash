@@ -129,12 +129,18 @@ export class GameScene extends Phaser.Scene {
     this.load.image('tiles', '../../assets/tiles.png');
 
     // Cars
-    this.load.image('bus', '../../assets/bus.png');
-    this.load.image('pickup', '../../assets/pickup.png');
-    this.load.image('police', '../../assets/police.png');
-    this.load.image('taxi', '../../assets/taxi.png');
-    this.load.image('sport', '../../assets/sport.png');
-    this.load.image('hatchback', '../../assets/hatchback.png');
+    this.load.image('bus-left', '../../assets/cars/bus-left.png');
+    this.load.image('pickup-left', '../../assets/cars/pickup-left.png');
+    this.load.image('police-left', '../../assets/cars/police-left.png');
+    this.load.image('taxi-left', '../../assets/cars/taxi-left.png');
+    this.load.image('sport-left', '../../assets/cars/sport-left.png');
+    this.load.image('hatchback-left', '../../assets/cars/hatchback-left.png');
+    this.load.image('bus-right', '../../assets/cars/bus-right.png');
+    this.load.image('pickup-right', '../../assets/cars/pickup-right.png');
+    this.load.image('police-right', '../../assets/cars/police-right.png');
+    this.load.image('taxi-right', '../../assets/cars/taxi-right.png');
+    this.load.image('sport-right', '../../assets/cars/sport-right.png');
+    this.load.image('hatchback-right', '../../assets/cars/hatchback-right.png');
 
     // Chickens
     this.load.spritesheet(
@@ -437,8 +443,8 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.carSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const car = new Car(this, x, y, 'car', direction);
-    car.setSize(32, 32);
-    car.setDisplaySize(32, 32);
+    car.setSize(48, 32);
+    car.setDisplaySize(48, 32);
     car.setDepth(1);
     this.carGroup.add(car);
     this.cars.push(car);

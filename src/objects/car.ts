@@ -14,7 +14,6 @@ export class Car extends Phaser.GameObjects.Sprite {
 
   public setDirection(direction: Direction) {
     this.direction = direction;
-    this.setFlipX(this.direction === Direction.Left);
   }
 
   public move() {
@@ -38,6 +37,7 @@ export class Car extends Phaser.GameObjects.Sprite {
     const randomTexture = this.textures[
       Math.floor(Math.random() * this.textures.length)
     ];
-    this.setTexture(randomTexture);
+    const direction = this.direction === Direction.Left ? 'left' : 'right';
+    this.setTexture(`${randomTexture}-${direction}`);
   }
 }
