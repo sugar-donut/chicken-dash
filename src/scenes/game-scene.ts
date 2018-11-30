@@ -20,22 +20,22 @@ export class GameScene extends Phaser.Scene {
     {
       direction: Direction.Right,
       x: -16,
-      y: 208,
+      y: 204,
     },
     {
       direction: Direction.Right,
       x: -16,
-      y: 240,
+      y: 236,
     },
     {
       direction: Direction.Left,
       x: 1008,
-      y: 336,
+      y: 332,
     },
     {
       direction: Direction.Left,
       x: 1008,
-      y: 304,
+      y: 300,
     },
   ];
 
@@ -212,14 +212,12 @@ export class GameScene extends Phaser.Scene {
 
     this.chickenSpawns.forEach(spawn => {
       const { x, y } = spawn;
-      const sprite = this.add.sprite(x, y, 'spawn');
-      sprite.setScale(2, 2);
+      this.add.sprite(x, y, 'spawn');
     });
 
     this.carSpawns.forEach(spawn => {
       const { x, y } = spawn;
-      const sprite = this.add.sprite(x, y, 'spawn');
-      sprite.setScale(2, 2);
+      this.add.sprite(x, y, 'spawn');
     });
 
     this.physics.systems.start(Phaser.Physics.Arcade);
@@ -474,9 +472,6 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.carSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const car = new Car(this, x, y, 'car', direction);
-    car.setSize(48, 32);
-    car.setDisplaySize(48, 32);
-    car.setDepth(1);
     this.carGroup.add(car);
     this.cars.push(car);
   };
@@ -488,9 +483,6 @@ export class GameScene extends Phaser.Scene {
     const spawn = this.chickenSpawns[randomSpawnIndex];
     const { x, y, direction } = spawn;
     const chicken = new Chicken(this, x, y, '', direction);
-    chicken.setSize(32, 32);
-    chicken.setDisplaySize(32, 32);
-    chicken.setDepth(2);
     this.chickenGroup.add(chicken);
     this.chickens.push(chicken);
   };

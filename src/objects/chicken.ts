@@ -1,6 +1,6 @@
 import { Direction } from '../enums/direction';
 
-export class Chicken extends Phaser.GameObjects.Sprite {
+export class Chicken extends Phaser.Physics.Arcade.Sprite {
   private direction: Direction;
   private isPointerDown: boolean = false;
   private speed: integer = 1;
@@ -15,6 +15,13 @@ export class Chicken extends Phaser.GameObjects.Sprite {
     this.setDirection(direction);
     this.setAnimation();
     this.input.cursor = 'pointer';
+
+    scene.physics.world.enableBody(this, 0);
+    this.setScale(2, 2);
+    this.setCircle(4);
+    this.setDepth(2);
+    this.body.setOffset(4, 6);
+
     scene.add.existing(this);
   }
 
