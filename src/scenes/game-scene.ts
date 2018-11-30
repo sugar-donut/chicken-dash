@@ -318,6 +318,10 @@ export class GameScene extends Phaser.Scene {
     tutorialButton.setScale(4, 4);
     tutorialButton.setInteractive();
     tutorialButton.input.cursor = 'pointer';
+    tutorialButton.on('pointerdown', () => {
+      window.location.href =
+        'https://github.com/sugar-donut/chicken-dash#tutorial';
+    });
 
     menuContainer.add(logo);
     menuContainer.add(startButton);
