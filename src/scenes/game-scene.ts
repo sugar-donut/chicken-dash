@@ -345,14 +345,15 @@ export class GameScene extends Phaser.Scene {
     this.chickens.forEach(chicken => chicken.move());
   }
 
-  private handleChickenCollision(chicken: Chicken, car: Car): void {
-    chicken.hit();
-    chicken.body = null;
-    chicken.destroy();
+  private handleChickenCollision(): void {
+    this.chickens.forEach(chicken => {
+      chicken.hit();
+      chicken.body = null;
+      chicken.destroy();
+    });
     this.cameras.main.flash(300, 255, 255, 255);
     this.cameras.main.shake(500, 0.03);
 
-    // Game over
     if (!this.isGameOver) {
       this.showGameOver();
     }
