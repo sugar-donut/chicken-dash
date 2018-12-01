@@ -16,5 +16,6 @@ If a chicken is hit then it is game over.
 
 ## Todo
 
+- [ ] Refactor
 - [ ] Sounds effects & music
 - [ ] In-game tutorial
