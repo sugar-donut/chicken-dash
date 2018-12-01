@@ -14,6 +14,8 @@ export class GameScene extends Phaser.Scene {
   private carGroup: Phaser.Physics.Arcade.Group;
   private safeGroup: Phaser.Physics.Arcade.Group;
 
+  private chickenTimer: Phaser.Time.TimerEvent;
+
   private cars: Car[] = [];
   private chickens: Chicken[] = [];
   private carSpawns = [
@@ -311,7 +313,7 @@ export class GameScene extends Phaser.Scene {
 
     startButton.on('pointerdown', () => {
       this.isStarted = true;
-      this.time.addEvent(chickenSpawnConfig);
+      this.chickenTimer = this.time.addEvent(chickenSpawnConfig);
       startButton.setInteractive(false);
       this.tweens.add({
         alpha: 0,
@@ -364,6 +366,11 @@ export class GameScene extends Phaser.Scene {
       this.score += 1;
       this.scoreText.setText(`${this.score}`);
     }
+    this.chickenTimer.reset({
+      callback: this.spawnChicken,
+      delay: this.chickenTimer.delay - 100,
+      loop: true,
+    });
     chicken.body = null;
     chicken.destroy();
   }
@@ -386,7 +393,7 @@ export class GameScene extends Phaser.Scene {
       delay: 5000,
       loop: true,
     };
-    this.time.addEvent(chickenSpawnConfig);
+    this.chickenTimer = this.time.addEvent(chickenSpawnConfig);
     this.time.addEvent(carSpawnConfig);
   };
 

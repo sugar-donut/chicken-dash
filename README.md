@@ -25,5 +25,4 @@ Click [here](https://sugar-donut.github.io/chicken-dash/) to play!
 - [ ] Refactor
 - [ ] Sounds effects & music
 - [ ] In-game tutorial
-- [ ] Incrementing difficulty
 - [ ] Pixel style font
