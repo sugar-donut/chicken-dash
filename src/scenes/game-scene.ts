@@ -116,66 +116,54 @@ export class GameScene extends Phaser.Scene {
 
   public preload(): void {
     // Menu
-    this.load.image('logo', '../../assets/logo.png');
-    this.load.image('tutorial', '../../assets/tutorial.png');
-    this.load.image('start', '../../assets/start.png');
-    this.load.image('game-over', '../../assets/game-over.png');
-    this.load.image('restart', '../../assets/restart.png');
+    this.load.image('logo', 'assets/logo.png');
+    this.load.image('tutorial', 'assets/tutorial.png');
+    this.load.image('start', 'assets/start.png');
+    this.load.image('game-over', 'assets/game-over.png');
+    this.load.image('restart', 'assets/restart.png');
 
     // Game
-    this.load.tilemapTiledJSON('map', '../../assets/map.json');
-    this.load.image('tiles', '../../assets/tiles.png');
+    this.load.tilemapTiledJSON('map', 'assets/map.json');
+    this.load.image('tiles', 'assets/tiles.png');
 
     // Cars
-    this.load.image('bus-left', '../../assets/cars/bus-left.png');
-    this.load.image('pickup-left', '../../assets/cars/pickup-left.png');
-    this.load.image('police-left', '../../assets/cars/police-left.png');
-    this.load.image('taxi-left', '../../assets/cars/taxi-left.png');
-    this.load.image('sport-left', '../../assets/cars/sport-left.png');
-    this.load.image('hatchback-left', '../../assets/cars/hatchback-left.png');
-    this.load.image('bus-right', '../../assets/cars/bus-right.png');
-    this.load.image('pickup-right', '../../assets/cars/pickup-right.png');
-    this.load.image('police-right', '../../assets/cars/police-right.png');
-    this.load.image('taxi-right', '../../assets/cars/taxi-right.png');
-    this.load.image('sport-right', '../../assets/cars/sport-right.png');
-    this.load.image('hatchback-right', '../../assets/cars/hatchback-right.png');
+    this.load.image('bus-left', 'assets/cars/bus-left.png');
+    this.load.image('pickup-left', 'assets/cars/pickup-left.png');
+    this.load.image('police-left', 'assets/cars/police-left.png');
+    this.load.image('taxi-left', 'assets/cars/taxi-left.png');
+    this.load.image('sport-left', 'assets/cars/sport-left.png');
+    this.load.image('hatchback-left', 'assets/cars/hatchback-left.png');
+    this.load.image('bus-right', 'assets/cars/bus-right.png');
+    this.load.image('pickup-right', 'assets/cars/pickup-right.png');
+    this.load.image('police-right', 'assets/cars/police-right.png');
+    this.load.image('taxi-right', 'assets/cars/taxi-right.png');
+    this.load.image('sport-right', 'assets/cars/sport-right.png');
+    this.load.image('hatchback-right', 'assets/cars/hatchback-right.png');
 
     // Chickens
     this.load.spritesheet(
       'chicken-down-moving',
-      '../../assets/chicken-down-moving.png',
+      'assets/chicken-down-moving.png',
       {
         frameHeight: 16,
         frameWidth: 16,
       },
     );
-    this.load.spritesheet(
-      'chicken-down-idle',
-      '../../assets/chicken-down-idle.png',
-      {
-        frameHeight: 16,
-        frameWidth: 16,
-      },
-    );
-    this.load.spritesheet(
-      'chicken-up-moving',
-      '../../assets/chicken-up-moving.png',
-      {
-        frameHeight: 16,
-        frameWidth: 16,
-      },
-    );
-    this.load.spritesheet(
-      'chicken-up-idle',
-      '../../assets/chicken-up-idle.png',
-      {
-        frameHeight: 16,
-        frameWidth: 16,
-      },
-    );
+    this.load.spritesheet('chicken-down-idle', 'assets/chicken-down-idle.png', {
+      frameHeight: 16,
+      frameWidth: 16,
+    });
+    this.load.spritesheet('chicken-up-moving', 'assets/chicken-up-moving.png', {
+      frameHeight: 16,
+      frameWidth: 16,
+    });
+    this.load.spritesheet('chicken-up-idle', 'assets/chicken-up-idle.png', {
+      frameHeight: 16,
+      frameWidth: 16,
+    });
 
     // Debug
-    this.load.image('spawn', '../../assets/spawn.png');
+    this.load.image('spawn', 'assets/spawn.png');
   }
 
   public create(): void {

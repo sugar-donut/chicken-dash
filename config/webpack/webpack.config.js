@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'eval-source-map',
   output: {
     path: path.resolve(process.cwd(), './dist'),
-    publicPath: '/',
+    publicPath: '',
     filename: '[name].js',
   },
   devServer: {
