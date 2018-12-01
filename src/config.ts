@@ -1,7 +1,7 @@
 import { GameScene } from './scenes/game-scene';
 
 export const config: GameConfig = {
-  height: window.innerHeight,
+  height: 544,
   parent: 'game',
   physics: {
     arcade: {
@@ -14,5 +14,5 @@ export const config: GameConfig = {
   },
   scene: [GameScene],
   type: Phaser.AUTO,
-  width: window.innerWidth,
+  width: 992,
 };

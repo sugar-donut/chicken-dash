@@ -112,9 +112,6 @@ export class GameScene extends Phaser.Scene {
     super({
       key: 'GameScene',
     });
-    window.addEventListener('resize', () => {
-      this.positionCamera();
-    });
   }
 
   public preload(): void {
@@ -182,8 +179,6 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    this.cameras.main.setViewport(0, 0, 992, 544);
-
     const map = this.make.tilemap({
       key: 'map',
       tileHeight: mapJson.tileheight,
@@ -195,8 +190,6 @@ export class GameScene extends Phaser.Scene {
     const objectLayer = map.createStaticLayer('Objects', tileset, 0, 0);
     backgroundLayer.setScale(2, 2);
     objectLayer.setScale(2, 2);
-
-    this.positionCamera();
 
     const carSpawnConfig: TimerEventConfig = {
       callback: this.spawnCar,
@@ -463,12 +456,6 @@ export class GameScene extends Phaser.Scene {
     this.gameOverContainer.add(gameOver);
     this.gameOverContainer.add(restartButton);
     this.time.removeAllEvents();
-  }
-
-  private positionCamera(): void {
-    const x = window.innerWidth / 2 - mapJson.width * mapJson.tilewidth;
-    const y = window.innerHeight / 2 - mapJson.height * mapJson.tileheight;
-    this.cameras.main.setPosition(Math.round(x), Math.round(y));
   }
 
   private spawnCar = () => {
