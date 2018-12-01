@@ -26,5 +26,4 @@ Click [here](https://sugar-donut.github.io/chicken-dash/) to play!
 - [ ] Sounds effects & music
 - [ ] In-game tutorial
 - [ ] Incrementing difficulty
-- [ ] Remove existing chickens on restart
 - [ ] Pixel style font
